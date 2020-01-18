@@ -4,7 +4,7 @@
 
 <div class="container" style="position:relative; top:60px;"> 
       <a class="btn btn-primary" href="<?php echo base_url();?>Home/NovoContato" role="button">Novo Contato</a>
-      <a class="btn btn-primary" href="index.php/Home/PDF" role="button">Gerar PDF</a>
+      <a class="btn btn-primary" href="<?php echo base_url();?>Home/PDF" role="button">Gerar PDF</a>
       
       <h2>Agenda:</h2>
       <div class="table-responsive">
@@ -50,3 +50,4 @@
     
 </div>
 
+<?php $this->load->view("footer.php"); ?>
