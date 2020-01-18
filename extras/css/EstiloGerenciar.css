@@ -1,0 +1,40 @@
+
+
+    #corpo{
+        background-color: darkseagreen;
+    }
+
+    #doacao{
+        position: relative;
+        top: 5px;  
+    }
+
+    #gerenciar{  
+        background-color: turquoise; /* Rcor da barra do nome: gerenciar estoque de doação */
+        font-size: 25px;
+        font-family: Arial;
+		padding:10px;
+    } 
+  #form_cadastro{
+	  width:600px;
+	  margin:0 auto;
+  }
+  
+   #form_cadastro2{
+	  width:600px;
+	  margin:0 auto;
+  }
+    input, id1{
+        size:3px; 
+    }
+
+	fieldset{
+		padding:10px;
+	}
+    #CorpoDoControle{
+        background-color: #BEBEBE;
+        font-size: 15px;
+        font-family: Arial;
+    }
+    
+    

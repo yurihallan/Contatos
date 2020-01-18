@@ -1,0 +1,32 @@
+
+
+    input, textarea{
+        font-family: sans-serif;
+        font-weight: normal;
+        font-size: 13pt;
+    } 
+    
+    div input:hover,textarea{
+        background-color: #dddddd;
+     }
+    
+    
+	#form_cadastro fieldset,#form_cadastro2 fieldset {
+		
+		padding:1px;
+		background-color:turquoise;
+	}
+	
+	#form_cadastro,#form_cadastro2{
+		padding:1px;
+		width:500px;
+		margin:0 auto;
+		background:#fff;
+		border:1px solid #ccc;
+		border-radius:5px;
+		font-family:helvetica;
+		
+					  
+	}
+   
+

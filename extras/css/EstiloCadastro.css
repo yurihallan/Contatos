@@ -1,0 +1,34 @@
+
+/* 
+    Created on : 11/11/2017, 17:20:29
+    Author     : yuri
+*/
+   
+	
+	fieldset{
+		padding:10px;
+	}
+	
+	
+
+    input, textarea{
+        font-family: sans-serif;
+        font-weight: normal;
+        font-size: 13pt;
+    } 
+    
+    div input:hover,textarea{
+        background-color: #dddddd;
+    }
+             
+   
+	#form_cadastro{
+		width:500px;
+		margin:0 auto;
+		background:#fff;
+		border:1px solid #ccc;
+		border-radius:5px;
+		font-family:helvetica;
+		padding:1px;
+					  
+	}
