@@ -29,8 +29,8 @@
         }
     }
         
-    function pesquisacep(valor) {
-
+    function pesquisacep() {
+        var valor = document.getElementById("cep").value;
         //Nova variável "cep" somente com dígitos.
         var cep = valor.replace("-","");
 		
@@ -106,41 +106,52 @@
 		
 				
                             <input type="hidden" name="id_contato" id="id_contato" value="<?= $contato[0]->id_contato?>" >
-							<label for="Nome">Nome:</label>
-							<input type="text"  class="form-control" name="Nome" id="Nome"  value="<?= $contato[0]->nome?>"  >
+							<label for="Nome">Nome:
+							    <input type="text"  class="form-control" name="Nome" id="Nome"  value="<?= $contato[0]->nome?>"  >
+                            </label>
 							
-							<label for="telefone">Telefone:</label>
-                            <input type="text" placeholder="(092)99999-9999" class="form-control" id="telefone" name="telefone"  value="<?= $contato[0]->telefone?>"  maxlength="14">
+							<label for="telefone">Telefone: 
+                                <input type="text" placeholder="(092)99999-9999" class="form-control" id="telefone" name="telefone"  value="<?= $contato[0]->telefone?>"  maxlength="14">
+                            </label>
                             
-                            <label for="email">Email:</label>
-							<input type="text" placeholder="teste@teste.com" class="form-control" id="email" name="email" value="<?= $contato[0]->email?>">
+                            <label for="email">Email: 
+							    <input type="text" placeholder="teste@teste.com" class="form-control" id="email" name="email" value="<?= $contato[0]->email?>">
+                            </label>
 										
-							<label for="cep">Cep:</label>
-							<input type="text" class="form-control" name="cep" id="cep" onblur="pesquisacep(this.value)" value="<?= $contato[0]->cep?>" >
+							<label for="cep">Cep:
+							    <input type="text" class="form-control" name="cep" id="cep" maxlength="9" value="<?= $contato[0]->cep?>" />
+                            </label>
+                            <input type="button" class="btn btn-dark" value="Pesquisar Cep" onclick="pesquisacep()">
 
-							<label for="Logradouro">Logradouro:</label>
-							<input type="text"  class="form-control" name="Logradouro" id="Logradouro" value="<?= $contato[0]->logradouro?>">
+							<label for="Logradouro">Logradouro: 
+							    <input type="text"  class="form-control" name="Logradouro" id="Logradouro" value="<?= $contato[0]->logradouro?>">
+                            </label>
 					
-							<label for="Numero">Numero:</label>
-							<input type="text" class="form-control" name="Numero" id="Numero" value="<?= $contato[0]->numero?>" >
+							<label for="Numero">Numero:
+							    <input type="text" class="form-control" name="Numero" id="Numero" value="<?= $contato[0]->numero?>" >
+                            </label>
 			
-							<label for="Bairro">Bairro:</label>
-							<input type="text"  class="form-control" name="Bairro" id="Bairro" value="<?= $contato[0]->bairro?>">
+							<label for="Bairro">Bairro:
+							    <input type="text"  class="form-control" name="Bairro" id="Bairro" value="<?= $contato[0]->bairro?>">
+                            </label>
 						
-							<label for="Cidade">Cidade:</label><br>
-							<input type="text" name="Cidade" id="Cidade"  class="form-control" value="<?= $contato[0]->cidade?>">
+							<label for="Cidade">Cidade:
+							    <input type="text" name="Cidade" id="Cidade"  class="form-control" value="<?= $contato[0]->cidade?>">
+                            </label>
 			
-							<label for="UF">UF:</label><br>
-							<input type="text" name="UF" id="UF"  class="form-control" value="<?= $contato[0]->uf?>">
+							<label for="UF">UF:
+							    <input type="text" name="UF" id="UF"  class="form-control" value="<?= $contato[0]->uf?>">
+                            </label>
 
-                            <label for="imagem">Imagem:</label>
-                            <input type="file" name="imagem"/>
+                            <label for="imagem">Imagem:
+                                <input type="file" name="imagem" /> 
+                            </label>
+                            <img src="<?php echo 'assets/img/'.$contato[0]->foto ?>" />
 			
-							<button type="submit" name="Submit" class="btn btn-dark" style=" float:right;margin-top: 20px; background-color:#87CEEB;">Atualizar</button>
+							<button type="submit" name="Submit" class="btn btn-dark" style="float:right;margin-top: 20px; margin-right: 70px; background-color:#00FA9A;">Atualizar</button>
 
 	</form>		
 	
 
 </div>
 
-<?php $this->load->view("footer.php"); ?>

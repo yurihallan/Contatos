@@ -76,31 +76,44 @@ class Home extends CI_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('nome','Nome', 'required');
 			$this->form_validation->set_rules('telefone','Telefone', 'required|numeric');
-			$this->form_validation->set_rules('email', 'Email', 'required');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('cep', 'cep', 'required');
-			$this->form_validation->set_rules('Logradouro', 'Logradouro', 'required');
 			$this->form_validation->set_rules('Numero', 'Numero', 'required');
-			$this->form_validation->set_rules('Bairro', 'Bairro', 'required');
-			$this->form_validation->set_rules('Cidade', 'Cidade', 'required');
-			$this->form_validation->set_rules('UF', 'UF','required');	
+			
+			
 	
+
+
+			
 			 if($this->form_validation->run() == TRUE){
 				
-				$data['nome'] = $this->input->post('nome');
-				$data['telefone'] = $this->input->post('telefone');
-				$data['email'] = $this->input->post('email');
-				$data['cep'] = $this->input->post('cep');
-				$data['numero'] = $this->input->post('Numero');
-				$data['logradouro'] =	$this->input->post('Logradouro');
-				$data['bairro'] = $this->input->post('Bairro');
-				$data['cidade'] = $this->input->post('Cidade');
-				$data['uf'] = $this->input->post('UF');
-				//$data['foto'] = $this->input->post('imagem');
-				$imagem = $_FILES['imagem'];
-				$data['foto'] = $imagem['name'];
-				$pasta = 'img';
+				$nome       = $this->input->post('nome');
+				$telefone   = $this->input->post('telefone');
+				$email      = $this->input->post('email');
+				$cep        = $this->input->post('cep');
+				$numero     = $this->input->post('Numero');
+				$logradouro =	$this->input->post('Logradouro');
+				$bairro     = $this->input->post('Bairro');
+				$cidade     = $this->input->post('Cidade');
+				$uf         = $this->input->post('UF');
+				
+				
+				$extensao = strtolower(substr($_FILES['imagem']['name'],-4));	//pega a extensao do arquivo 
+				$novo_nomeCod = md5(time()) . $extensao; //define o nome do arquivo
+				$diretorio = './assets/img/'; //define o diretorio para onde enviareamos o arquivo 
+			
+				move_uploaded_file($_FILES['imagem']['tmp_name'],$diretorio.$novo_nomeCod); //efetua o upload
 		
-				$res = $this->db->insert('contato',$data);
+				$res = $this->agendaModels->cadastro_contato($nome,      
+										 $telefone,  
+										 $email,     
+										 $cep,       
+										 $numero,    
+										 $logradouro,
+										 $bairro,    
+										 $cidade,    
+										 $uf,        
+										 $novo_nomeCod);
 				
 				if($res){
 					$dados['msgAlert'] = "<div style='top:10px; width:100%' class='container alert alert-success' role='alert'>
@@ -116,10 +129,8 @@ class Home extends CI_Controller {
 				
 				
 			}else{
-				$dados['msgAlert'] = "<div style='top:10px; width:100%' class='container alert alert-danger' role='alert'>
-				Erro na validação!  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-				<span aria-hidden='true'>&times;</span>
-			  </button></div>";
+				$dados = array('mensagens' => validation_errors());
+				
 			}
 			$this->load->view('NovoContato',$dados);
 		
@@ -141,8 +152,15 @@ class Home extends CI_Controller {
 				$cidade = $this->input->post('Cidade');
 				$uf = $this->input->post('UF');
 
+
+					
+				$extensao = strtolower(substr($_FILES['imagem']['name'],-4));	//pega a extensao do arquivo 
+				$novo_nomeCod = md5(time()) . $extensao; //define o nome do arquivo
+				$diretorio = './assets/img/'; //define o diretorio para onde enviareamos o arquivo 
+			
+				move_uploaded_file($_FILES['imagem']['tmp_name'],$diretorio.$novo_nomeCod); //efetua o upload
 				
-				$res = $this->agendaModels->update($nome,$telefone,$email,$cep,$numero,$logradouro,$bairro,$cidade,$uf,$id_contato);
+				$res = $this->agendaModels->update($nome,$telefone,$email,$cep,$numero,$logradouro,$bairro,$cidade,$uf,$novo_nomeCod,$id_contato);
 				
 	
 				if($res){
@@ -177,6 +195,13 @@ class Home extends CI_Controller {
 
 	}
 
+
+	public function PdfGeral(){
+		$this->db->select('*');
+		$data['contato'] = $this->db->get('contato')->result();
+				
+		$this->load->view('PDF',$data);
+	}
 
 
 	

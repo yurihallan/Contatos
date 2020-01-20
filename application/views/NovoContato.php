@@ -2,7 +2,10 @@
 
 
 <script>
-  
+
+        
+
+
   function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
             document.getElementById('Logradouro').value=("");
@@ -29,7 +32,8 @@
         }
     }
         
-    function pesquisacep(valor) {
+    function pesquisacep() {
+        var valor = document.getElementById("cep").value;
 
         //Nova variável "cep" somente com dígitos.
         var cep = valor.replace("-","");
@@ -88,6 +92,10 @@
         } //end if.
         else {
             //cep sem valor, limpa formulário.
+            /*<div style='top:10px; width:100%' class='container alert alert-danger' role='alert'>
+				Erro na validação!  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+				<span aria-hidden='true'>&times;</span>
+			  </button></div> */
             limpa_formulário_cep();
         }
     };
@@ -97,7 +105,14 @@
 
 <div class="container" style="background-color:#F0FFF0; padding:40px;">
     <a class="btn btn-primary" href="<?php echo base_url();?>Home" role="button">Voltar</a>
-    <?php if(isset($msgAlert)): echo  $msgAlert; endif?>
+    <?php if(isset($msgAlert)): echo  $msgAlert;  elseif(isset($mensagens)): echo "<div style='top:10px; width:100%' class='container alert alert-danger' role='alert'>
+                                                                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                                                        <span aria-hidden='true'>&times;</span>
+                                                                                        </button>
+                                                                                        $mensagens  
+                                                                                    </div> ";
+    endif
+    ?>
 
     <h2>NOVO CONTATO</h2><hr>
 	<form action="<?php echo base_url();?>index.php/Home/CadastarContato" method="post" class="border border-dark alert-primary" enctype="multipart/form-data" >
@@ -105,41 +120,50 @@
 				
                             
 
-							<label>Nome:</label>
-							<input type="text"  class="form-control" name="nome" >
+							<label>Nome:
+							    <input type="text"  class="form-control" name="nome" >
+                            </label>
 							
-							<label for="telefone">Telefone:</label>
-                            <input type="text" placeholder="(092)99999-9999" class="form-control" id="telefone" name="telefone"  maxlength="14" >
+							<label for="telefone">Telefone: 
+                                <input type="text" placeholder="(92)99999-9999" class="form-control" id="telefone" name="telefone"  maxlength="14" " >
+                            </label>
                             
-                            <label >Email:</label>
-							<input type="text" placeholder="teste@teste.com" class="form-control" name="email" value="">
+                            <label >Email: 
+							    <input type="text" placeholder="teste@teste.com" class="form-control" name="email" >
+                            </label>
 										
-							<label for="cep">Cep:</label>
-							<input type="text" class="form-control" name="cep" onblur="pesquisacep(this.value)" >
+							<label for="cep">Cep:
+							    <input type="text" class="form-control" name="cep" id="cep" maxlength="9"  />
+                            </label>
+                            <input type="button" class="btn btn-dark" value="Pesquisar Cep" onclick="pesquisacep()">
 
-							<label for="Logradouro">Logradouro:</label>
-							<input type="text"  class="form-control" name="Logradouro" id="Logradouro">
+							<label for="Logradouro">Logradouro: 
+							    <input type="text"  class="form-control" name="Logradouro" id="Logradouro">
+                            </label>
 					
-							<label for="Numero">Numero:</label>
-							<input type="text" class="form-control" name="Numero" id="Numero"  >
+							<label for="Numero">Numero: 
+						    	<input type="text" class="form-control" name="Numero" id="Numero"   >
+                            </label>
 			
-							<label for="Bairro">Bairro:</label>
-							<input type="text"  class="form-control" name="Bairro" id="Bairro">
+							<label for="Bairro">Bairro: 
+		    					<input type="text"  class="form-control" name="Bairro" id="Bairro">
+                            </label>
 						
-							<label for="Cidade">Cidade:</label><br>
-							<input type="text" name="Cidade" id="Cidade"  class="form-control" >
+							<label for="Cidade">Cidade:
+							    <input type="text" name="Cidade" id="Cidade"  class="form-control" >
+                            </label>
 			
-							<label for="UF">UF:</label><br>
-							<input type="text" name="UF" id="UF"  class="form-control" >
+							<label for="UF">UF:
+							    <input type="text" name="UF" id="UF"  class="form-control" >
+                            </label>
 
-                            <label for="imagem">Imagem:</label>
-                            <input type="file" name="imagem"/>
+                            <label for="imagem">Imagem:
+                                <input type="file" name="imagem" id="imagem"/>
+                            </label>
 			
-							<button type="submit" name="Submit" class="btn btn-dark" style=" float:right;margin-top: 20px; background-color:#87CEEB;">Salvar</button>
+							<button type="submit" name="Submit" class="btn btn-dark" style=" float:right;margin-top: 20px; margin-right: 70px; background-color:#00FA9A;">Salvar</button>
 
 	</form>		
 	
 
 </div>
-
-<?php $this->load->view("footer.php"); ?>
